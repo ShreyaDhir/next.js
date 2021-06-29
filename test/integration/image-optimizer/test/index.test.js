@@ -856,6 +856,9 @@ describe('Image Optimizer', () => {
       const res = await fetchViaHTTP(appPort, '/_next/image', query, opts)
       expect(res.status).toBe(200)
       expect(res.headers.get('Content-Type')).toBe('image/webp')
+      expect(res.headers.get('Cache-Control')).toBe(
+        'public, max-age=31536000, must-revalidate'
+      )
       await expectWidth(res, 64)
     })
   })
